@@ -79,6 +79,7 @@ var ding = new Audio("audio/ding.mp3"),
             // length.
             this.reset(true); // Do a soft reset.
             makeFullscreen(false)
+            currentWindow.blur()
         },
         pause: function () {
             // This pauses the timer, allowing the user to
