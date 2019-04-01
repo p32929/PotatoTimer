@@ -1,7 +1,7 @@
 {
   "name": "Pomodoro",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "version": "1.0.1",
+  "description": "A minimal Electron Pomodoro application",
   "main": "main.js",
   "scripts": {
     "postinstall": "install-app-deps",
