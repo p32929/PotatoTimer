@@ -1,6 +1,10 @@
 const currentWindow = require('electron').remote.getCurrentWindow();
 
 // pomodoro object contains all the values used by the pomodoro clock, as well as methods to manipulate those values and show them in the html widget.
+
+var workTime = 51;
+var breakTime = 18;
+
 var ding = new Audio("audio/ding.mp3"),
     pomodoro = {
         isBreak: false,
@@ -12,7 +16,7 @@ var ding = new Audio("audio/ding.mp3"),
         // is stored here because it was annoying
         // evaluating the button text directly.
         sessionLength: {
-            value: 25,
+            value: workTime,
             increase: function () {
                 this.value++;
                 $("#session-length").text(this.value);
@@ -27,7 +31,7 @@ var ding = new Audio("audio/ding.mp3"),
             }
         },
         breakLength: {
-            value: 5,
+            value: breakTime,
             increase: function () {
                 this.value++;
                 $("#break-length").text(this.value);
@@ -47,10 +51,10 @@ var ding = new Audio("audio/ding.mp3"),
                 // user inputted break and session lengths.
                 // If a soft reset is not requested, then reset
                 // everything.
-                this.sessionLength.value = 25;
-                this.breakLength.value = 5;
-                $("#session-length").text(25);
-                $("#break-length").text(5);
+                this.sessionLength.value = workTime;
+                this.breakLength.value = breakTime;
+                $("#session-length").text(workTime);
+                $("#break-length").text(breakTime);
             }
             this.isBreak = false;
             this.isPaused = false;
@@ -70,7 +74,7 @@ var ding = new Audio("audio/ding.mp3"),
             // This starts the timer.
 
             this.startTime = new Date().getTime();
-            this.endTime = this.startTime + (this.sessionLength.value * 60 * 1000) + 1000; // I added an extra second so that the time the counter displays will start with the inputted breaktime/endtime (start with 5:00 instead of 4:59)
+            this.endTime = this.startTime + (this.sessionLength.value * 60 * 1000) + 1000; // I added an extra second so that the time the counter displays will start with the inputted breaktime/endtime (start with 18:00 instead of 17:59)
             makeFullscreen(false)
         },
         stop: function () {
@@ -79,7 +83,6 @@ var ding = new Audio("audio/ding.mp3"),
             // length.
             this.reset(true); // Do a soft reset.
             makeFullscreen(false)
-            currentWindow.blur()
         },
         pause: function () {
             // This pauses the timer, allowing the user to
