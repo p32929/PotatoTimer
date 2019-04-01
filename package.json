@@ -4,68 +4,47 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
+    "postinstall": "install-app-deps",
     "start": "electron .",
-    "lint": "standard",
-    "format": "prettier --write '**/*.js' && standard --fix",
-    "pack": "electron-builder --dir",
-    "dist": "npm run dist:mac && npm run dist:linux && npm run dist:win",
-    "dist:mac": "electron-builder --mac",
-    "dist:linux": "electron-builder --linux",
-    "dist:win": "electron-builder --win",
-    "postinstall": "electron-builder install-app-deps",
-    "precommit": "lint-staged",
-    "postversion": "git push --follow-tags"
+    "pack": "build --dir",
+    "dist": "build"
   },
   "keywords": [
     "Electron",
     "Pomodoro"
   ],
   "build": {
-    "appId": "com.andrepolischuk.thomas",
-    "files": [
-      "**/*"
-    ],
-    "mac": {
-      "category": "public.app-category.productivity",
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "darkModeSupport": true
-    },
+    "appId": "Pomodoro",
     "dmg": {
-      "iconSize": 160,
       "contents": [
         {
-          "x": 180,
-          "y": 170
+          "x": 110,
+          "y": 150
         },
         {
-          "x": 480,
-          "y": 170,
+          "x": 240,
+          "y": 150,
           "type": "link",
           "path": "/Applications"
         }
       ]
     },
     "linux": {
-      "category": "Utility",
       "target": [
         "AppImage",
         "deb"
       ]
     },
     "win": {
-      "target": [
-        "nsis"
-      ]
+      "target": "NSIS",
+      "icon": "build/icon.ico"
     }
   },
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^3.0.7",
-    "electron-builder": "^20.38.3"
+    "electron-builder": "^20.39.0"
   },
   "dependencies": {
     "electron-reload": "^1.4.0",

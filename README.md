@@ -5,6 +5,9 @@
 2. npm install
 3. npm start
 
+## Download
+https://github.com/p32929/Electron-Pomotodo/releases
+
 ## Contribution
 thanks to mcaubrey ((https://github.com/mcaubrey/) for his Pomodoro Clock project. 
 
