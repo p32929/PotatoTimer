@@ -2,8 +2,8 @@ const currentWindow = require('electron').remote.getCurrentWindow();
 
 // pomodoro object contains all the values used by the pomodoro clock, as well as methods to manipulate those values and show them in the html widget.
 
-var workTime = 51;
-var breakTime = 18;
+var workTime = 24;
+var breakTime = 6;
 
 var ding = new Audio("audio/ding.mp3"),
     pomodoro = {
