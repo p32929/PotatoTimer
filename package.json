@@ -1,6 +1,6 @@
 {
-  "name": "Pomodoro",
-  "version": "1.0.0.1",
+  "name": "electron-pomotodo",
+  "version": "1.0.0",
   "description": "A minimal Electron Pomodoro application",
   "main": "main.js",
   "scripts": {
