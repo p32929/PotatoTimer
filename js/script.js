@@ -1,9 +1,7 @@
 const currentWindow = require('electron').remote.getCurrentWindow();
 
-// pomodoro object contains all the values used by the pomodoro clock, as well as methods to manipulate those values and show them in the html widget.
-
-var workTime = 25;
-var breakTime = 5;
+var workTime = 0.09;
+var breakTime = 0.09;
 
 document.getElementById('counter').innerHTML = workTime + ":00";
 document.getElementById('session-length').innerHTML = workTime;
@@ -258,6 +256,13 @@ $(document).ready(function () {
 })
 
 function makeFullscreen(b) {
-    currentWindow.setFullScreen(b)
-    currentWindow.setAlwaysOnTop(b)
+    // currentWindow.setFullScreen(b)
+    // currentWindow.setAlwaysOnTop(b)
+
+    if (b) {
+        currentWindow.maximize()
+    }
+    else{
+        currentWindow.unmaximize()
+    }
 }
