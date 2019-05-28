@@ -1,7 +1,7 @@
 const currentWindow = require('electron').remote.getCurrentWindow();
 
-var workTime = 0.09;
-var breakTime = 0.09;
+var workTime = 25;
+var breakTime = 5;
 
 document.getElementById('counter').innerHTML = workTime + ":00";
 document.getElementById('session-length').innerHTML = workTime;

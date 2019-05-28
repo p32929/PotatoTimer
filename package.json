@@ -1,5 +1,5 @@
 {
-  "name": "electron-pomotodo",
+  "name": "PotatoTimer",
   "version": "1.0.0",
   "description": "A minimal Electron Pomodoro application",
   "main": "main.js",
@@ -36,8 +36,9 @@
       ]
     },
     "win": {
-      "target": "NSIS",
-      "icon": "build/icon.ico"
+      "target": "nsis",
+      "icon": "build/icon.ico",
+      "publisherName": "April Mintac Pineda"
     }
   },
   "author": "GitHub",
