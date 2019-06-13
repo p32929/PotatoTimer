@@ -1,5 +1,8 @@
 const currentWindow = require('electron').remote.getCurrentWindow();
 
+const Store = require('electron-store');
+const store = new Store();
+
 var workTime = 0.19;
 var breakTime = 0.09;
 
@@ -95,6 +98,7 @@ var ding = new Audio("audio/ding.mp3"),
         },
         start: function () {
             // This starts the timer.
+            store.set('isStarted', true);
 
             this.startTime = new Date().getTime();
             this.endTime = this.startTime + (this.sessionLength.value * 60 * 1000) + 1000; // I added an extra second so that the time the counter displays will start with the inputted breaktime/endtime (start with 18:00 instead of 17:59)
@@ -104,12 +108,16 @@ var ding = new Audio("audio/ding.mp3"),
             // This stops the timer and resets it using
             // the current values for session and break
             // length.
+            store.set('isStarted', false);
+
             this.reset(true); // Do a soft reset.
             makeFullscreen(false)
         },
         pause: function () {
             // This pauses the timer, allowing the user to
             // resume at any later time.
+            store.set('isStarted', false);
+
             this.isPaused = true;
             makeFullscreen(false)
         },
