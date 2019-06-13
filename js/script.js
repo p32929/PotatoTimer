@@ -291,12 +291,13 @@ $(document).ready(function () {
 })
 
 function makeFullscreen(b) {
-    currentWindow.setAlwaysOnTop(b)
-    currentWindow.setFullScreen(b)
-
     if (b) {
         currentWindow.maximize()
+        currentWindow.setAlwaysOnTop(b)
+        currentWindow.setFullScreen(b)
     } else {
+        currentWindow.setAlwaysOnTop(b)
+        currentWindow.setFullScreen(b)
         currentWindow.unmaximize()
     }
 }
