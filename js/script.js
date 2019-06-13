@@ -3,8 +3,8 @@ const currentWindow = require('electron').remote.getCurrentWindow();
 const Store = require('electron-store');
 const store = new Store();
 
-var workTime = 0.19;
-var breakTime = 0.09;
+var workTime = 25;
+var breakTime = 5;
 
 var workTime50 = 50;
 var breakTime10 = 10;
