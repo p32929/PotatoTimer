@@ -51,7 +51,7 @@ var ding = new Audio("audio/ding.mp3"),
                 }
             }
         },
-        reset: function (softReset) {
+        reset: function () {
             // This resets the pomodoro object
             // and the DOM to its original state.
 
@@ -110,7 +110,7 @@ var ding = new Audio("audio/ding.mp3"),
             // length.
             store.set('isStarted', false);
 
-            this.reset(true); // Do a soft reset.
+            this.reset(); // Do a soft reset.
             makeFullscreen(false)
         },
         pause: function () {
@@ -291,11 +291,12 @@ $(document).ready(function () {
 })
 
 function makeFullscreen(b) {
+    currentWindow.setAlwaysOnTop(b)
+    currentWindow.setFullScreen(b)
+
     if (b) {
         currentWindow.maximize()
     } else {
         currentWindow.unmaximize()
     }
-    currentWindow.setAlwaysOnTop(b)
-    currentWindow.setFullScreen(b)
 }
