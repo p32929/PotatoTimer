@@ -2,7 +2,7 @@
 require('electron-reload')(__dirname);
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const {app, BrowserWindow, Menu, Tray} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -19,9 +19,9 @@ function createWindow() {
         height: 600,
         backgroundColor: '#ffffff',
         transparent: false,
-        icon: image
+        icon: image,
+        maximizable: false
     })
-    // , minimizable: false
 
     // and load the index.html of the app.
     mainWindow.loadFile('index.html')
@@ -36,6 +36,40 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null
+    })
+
+    var appIcon = new Tray(image)
+
+    var contextMenu = Menu.buildFromTemplate([
+        {
+            label: 'Show', click: function () {
+                mainWindow.show()
+            }
+        },
+        {
+            label: 'Quit', click: function () {
+                app.isQuiting = true
+                app.quit()
+            }
+        }
+    ])
+
+    appIcon.setContextMenu(contextMenu)
+    appIcon.on('click', function () {
+        mainWindow.show()
+    })
+
+    mainWindow.on('close', function (event) {
+        mainWindow = null
+    })
+
+    mainWindow.on('minimize', function (event) {
+        event.preventDefault()
+        mainWindow.hide()
+    })
+
+    mainWindow.on('show', function () {
+        appIcon.setHighlightMode('always')
     })
 }
 

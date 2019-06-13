@@ -1,7 +1,10 @@
 const currentWindow = require('electron').remote.getCurrentWindow();
 
-var workTime = 50;
-var breakTime = 10;
+var workTime = 0.19;
+var breakTime = 0.09;
+
+var workTime50 = 50;
+var breakTime10 = 10;
 
 document.getElementById('counter').innerHTML = workTime + ":00";
 document.getElementById('session-length').innerHTML = workTime;
@@ -48,16 +51,34 @@ var ding = new Audio("audio/ding.mp3"),
         reset: function (softReset) {
             // This resets the pomodoro object
             // and the DOM to its original state.
-            if (!softReset) {
-                // If a soft reset is requested, then don't reset
-                // user inputted break and session lengths.
-                // If a soft reset is not requested, then reset
-                // everything.
-                this.sessionLength.value = workTime;
-                this.breakLength.value = breakTime;
-                $("#session-length").text(workTime);
-                $("#break-length").text(breakTime);
-            }
+
+            this.sessionLength.value = workTime;
+            this.breakLength.value = breakTime;
+            $("#session-length").text(workTime);
+            $("#break-length").text(breakTime);
+
+            this.isBreak = false;
+            this.isPaused = false;
+            this.timeRemaining = 0;
+            this.action1 = "start"
+            $("#action1").text("start");
+            $("#action2").css({
+                "visibility": "hidden"
+            });
+            toggleVisible("show");
+            this.startTime = 0;
+            this.endTime = 0;
+            $("#counter").text(this.sessionLength.value.toString() + ":00");
+            makeFullscreen(false)
+        },
+        reset50: function () {
+            // This resets the pomodoro object
+            // and the DOM to its original state.
+            this.sessionLength.value = workTime50;
+            this.breakLength.value = breakTime10;
+            $("#session-length").text(workTime50);
+            $("#break-length").text(breakTime10);
+
             this.isBreak = false;
             this.isPaused = false;
             this.timeRemaining = 0;
@@ -97,7 +118,10 @@ var ding = new Audio("audio/ding.mp3"),
             this.isPaused = false;
             this.startTime = new Date().getTime();
             this.endTime = this.startTime + this.timeRemaining;
-            makeFullscreen(false)
+            if (pomodoro.isBreak)
+                makeFullscreen(true)
+            else
+                makeFullscreen(false)
         }
     },
     modal = {
@@ -192,8 +216,11 @@ window.setInterval(function () {
 }, 100);
 
 $(document).ready(function () {
-    $("#reset").click(function () {
+    $("#ti255").click(function () {
         pomodoro.reset();
+    });
+    $("#ti5010").click(function () {
+        pomodoro.reset50();
     });
     $("#action1").click(function () {
         if (pomodoro.action1 === "start" ||
@@ -244,7 +271,7 @@ $(document).ready(function () {
         playDing();
     });
 
-    $("#fcc").click(function () {
+    $("#about").click(function () {
         modal.show();
     })
     $("#close").click(function () {
@@ -256,13 +283,11 @@ $(document).ready(function () {
 })
 
 function makeFullscreen(b) {
-    // currentWindow.setFullScreen(b)
-    // currentWindow.setAlwaysOnTop(b)
-
     if (b) {
         currentWindow.maximize()
-    }
-    else{
+    } else {
         currentWindow.unmaximize()
     }
+    currentWindow.setAlwaysOnTop(b)
+    currentWindow.setFullScreen(b)
 }
