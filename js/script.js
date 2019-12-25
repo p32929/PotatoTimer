@@ -264,10 +264,15 @@ $(document).ready(function () {
     $("#session-length").click(function () {
         setWorkLength()
     })
+    $("#session-min").click(function () {
+        setWorkLength()
+    })
     $("#break-length").click(function () {
         setBreakLength()
     })
-
+    $("#break-min").click(function () {
+        setBreakLength()
+    })
 })
 
 function makeFullscreen(b) {
