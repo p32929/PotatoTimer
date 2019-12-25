@@ -1,14 +1,19 @@
 const currentWindow = require('electron').remote.getCurrentWindow();
+const prompt = require('electron-prompt');
 
 const Store = require('electron-store');
 const store = new Store();
 
-var workTime = 50;
-var breakTime = 10;
+var workTime = 25;
+var breakTime = 5;
 
-document.getElementById('counter').innerHTML = workTime + ":00";
-document.getElementById('session-length').innerHTML = workTime;
-document.getElementById('break-length').innerHTML = breakTime;
+var counterDOM = document.getElementById('counter')
+var sessionLengthDOM = document.getElementById('session-length')
+var breakLengthDOM = document.getElementById('break-length')
+
+counterDOM.innerHTML = workTime + ":00";
+sessionLengthDOM.innerHTML = workTime;
+breakLengthDOM.innerHTML = breakTime;
 
 var ding = new Audio("audio/ding.mp3"),
     pomodoro = {
@@ -21,30 +26,28 @@ var ding = new Audio("audio/ding.mp3"),
         // is stored here because it was annoying
         // evaluating the button text directly.
         sessionLength: {
-            value: workTime,
             increase: function () {
-                this.value++;
-                $("#session-length").text(this.value);
-                $("#counter").text(this.value.toString() + ":00");
+                workTime++;
+                $("#session-length").text(workTime);
+                $("#counter").text(workTime.toString() + ":00");
             },
             decrease: function () {
-                if (this.value > 1) {
-                    this.value--;
-                    $("#session-length").text(this.value);
-                    $("#counter").text(this.value.toString() + ":00");
+                if (workTime > 1) {
+                    workTime--;
+                    $("#session-length").text(workTime);
+                    $("#counter").text(workTime.toString() + ":00");
                 }
             }
         },
         breakLength: {
-            value: breakTime,
             increase: function () {
-                this.value++;
-                $("#break-length").text(this.value);
+                breakTime++;
+                $("#break-length").text(breakTime);
             },
             decrease: function () {
-                if (this.value > 1) {
-                    this.value--;
-                    $("#break-length").text(this.value);
+                if (breakTime > 1) {
+                    breakTime--;
+                    $("#break-length").text(breakTime);
                 }
             }
         },
@@ -52,8 +55,6 @@ var ding = new Audio("audio/ding.mp3"),
             // This resets the pomodoro object
             // and the DOM to its original state.
 
-            this.sessionLength.value = workTime;
-            this.breakLength.value = breakTime;
             $("#session-length").text(workTime);
             $("#break-length").text(breakTime);
 
@@ -68,7 +69,7 @@ var ding = new Audio("audio/ding.mp3"),
             toggleVisible("show");
             this.startTime = 0;
             this.endTime = 0;
-            $("#counter").text(this.sessionLength.value.toString() + ":00");
+            $("#counter").text(workTime.toString() + ":00");
             makeFullscreen(false)
         },
         start: function () {
@@ -76,7 +77,7 @@ var ding = new Audio("audio/ding.mp3"),
             store.set('isStarted', true);
 
             this.startTime = new Date().getTime();
-            this.endTime = this.startTime + (this.sessionLength.value * 60 * 1000) + 1000; // I added an extra second so that the time the counter displays will start with the inputted breaktime/endtime (start with 18:00 instead of 17:59)
+            this.endTime = this.startTime + (workTime * 60 * 1000) + 1000; // I added an extra second so that the time the counter displays will start with the inputted breaktime/endtime (start with 18:00 instead of 17:59)
             makeFullscreen(false)
         },
         stop: function () {
@@ -186,7 +187,7 @@ window.setInterval(function () {
                     playDing();
                 });
             })
-            pomodoro.endTime = now + (pomodoro.breakLength.value * 60 * 1000) + 1000;
+            pomodoro.endTime = now + (breakTime * 60 * 1000) + 1000;
             makeFullscreen(true)
         } else if (pomodoro.timeRemaining < 0 &&
             pomodoro.isBreak === true) {
@@ -260,6 +261,13 @@ $(document).ready(function () {
     $("#overlay").click(function () {
         modal.hide();
     });
+    $("#session-length").click(function () {
+        setWorkLength()
+    })
+    $("#break-length").click(function () {
+        setBreakLength()
+    })
+
 })
 
 function makeFullscreen(b) {
@@ -272,4 +280,54 @@ function makeFullscreen(b) {
         currentWindow.setFullScreen(b)
         currentWindow.unmaximize()
     }
+}
+
+function setWorkLength() {
+    prompt({
+        title: 'Enter Session Length',
+        label: 'Session length:',
+        value: workTime,
+        inputAttrs: {
+            type: 'number', required: true
+        },
+        type: 'input'
+    })
+        .then((r) => {
+            if (r === null) {
+                console.log('user cancelled');
+            } else {
+                if (r !== '') {
+                    workTime = parseInt(r);
+                    counterDOM.innerHTML = workTime + ":00";
+                    sessionLengthDOM.innerHTML = workTime;
+                    breakLengthDOM.innerHTML = breakTime;
+                }
+            }
+        })
+        .catch(console.error);
+}
+
+function setBreakLength() {
+    prompt({
+        title: 'Enter Break Length',
+        label: 'Break length:',
+        value: breakTime,
+        inputAttrs: {
+            type: 'number', required: true
+        },
+        type: 'input'
+    })
+        .then((r) => {
+            if (r === null) {
+                console.log('user cancelled');
+            } else {
+                if (r !== '') {
+                    breakTime = parseInt(r);
+                    counterDOM.innerHTML = workTime + ":00";
+                    sessionLengthDOM.innerHTML = workTime;
+                    breakLengthDOM.innerHTML = breakTime;
+                }
+            }
+        })
+        .catch(console.error);
 }
