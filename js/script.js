@@ -1,8 +1,9 @@
 const currentWindow = require('electron').remote.getCurrentWindow();
-const prompt = require('electron-prompt');
 
 const Store = require('electron-store');
 const store = new Store();
+const Dialogs = require('dialogs')
+const dialogs = Dialogs()
 
 var workTime = 25;
 var breakTime = 5;
@@ -288,51 +289,25 @@ function makeFullscreen(b) {
 }
 
 function setWorkLength() {
-    prompt({
-        title: 'Enter Session Length',
-        label: 'Session length:',
-        value: workTime,
-        inputAttrs: {
-            type: 'number', required: true
-        },
-        type: 'input'
+    console.log("setWorkLength")
+    dialogs.prompt('Work Length', ok => {
+        if (ok) {
+            workTime = parseInt(ok) < 1 ? 1 : parseInt(ok);
+            counterDOM.innerHTML = workTime + ":00";
+            sessionLengthDOM.innerHTML = workTime;
+            breakLengthDOM.innerHTML = breakTime;
+        }
     })
-        .then((r) => {
-            if (r === null) {
-                console.log('user cancelled');
-            } else {
-                if (r !== '') {
-                    workTime = parseInt(r);
-                    counterDOM.innerHTML = workTime + ":00";
-                    sessionLengthDOM.innerHTML = workTime;
-                    breakLengthDOM.innerHTML = breakTime;
-                }
-            }
-        })
-        .catch(console.error);
 }
 
 function setBreakLength() {
-    prompt({
-        title: 'Enter Break Length',
-        label: 'Break length:',
-        value: breakTime,
-        inputAttrs: {
-            type: 'number', required: true
-        },
-        type: 'input'
+    console.log("setBreakLength")
+    dialogs.prompt('Break Length', ok => {
+        if (ok) {
+            breakTime = parseInt(ok) < 1 ? 1 : parseInt(ok);
+            counterDOM.innerHTML = workTime + ":00";
+            sessionLengthDOM.innerHTML = workTime;
+            breakLengthDOM.innerHTML = breakTime;
+        }
     })
-        .then((r) => {
-            if (r === null) {
-                console.log('user cancelled');
-            } else {
-                if (r !== '') {
-                    breakTime = parseInt(r);
-                    counterDOM.innerHTML = workTime + ":00";
-                    sessionLengthDOM.innerHTML = workTime;
-                    breakLengthDOM.innerHTML = breakTime;
-                }
-            }
-        })
-        .catch(console.error);
 }

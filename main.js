@@ -35,10 +35,9 @@ function createWindow() {
     // and load the index.html of the app.
     mainWindow.loadFile('index.html')
     mainWindow.setMenu(null)
-    // mainWindow.webContents.openDevTools({ mode: 'detach' })
-
+    
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
