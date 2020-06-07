@@ -25,12 +25,17 @@ function createWindow() {
         backgroundColor: '#ffffff',
         transparent: false,
         icon: image,
-        maximizable: false
+        maximizable: false,
+        webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true
+        }
     })
 
     // and load the index.html of the app.
     mainWindow.loadFile('index.html')
     mainWindow.setMenu(null)
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()

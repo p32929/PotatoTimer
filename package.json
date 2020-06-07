@@ -44,14 +44,14 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^3.0.7",
-    "electron-builder": "^20.39.0"
+    "electron": "^9.0.2",
+    "electron-builder": "^22.7.0"
   },
   "dependencies": {
-    "electron-prompt": "^1.4.0",
-    "electron-reload": "^1.4.0",
-    "electron-store": "^3.3.0",
-    "jquery": "^3.3.1",
+    "electron-prompt": "^1.5.1",
+    "electron-reload": "^1.5.0",
+    "electron-store": "^5.2.0",
+    "jquery": "^3.5.1",
     "v8-compile-cache": "^2.1.1"
   }
 }
