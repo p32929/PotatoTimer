@@ -70,6 +70,8 @@ function createWindow() {
         mainWindow.show()
     })
 
+    mainWindow.tray = appIcon;
+
     mainWindow.on('close', function (event) {
         mainWindow = null
     })
@@ -81,9 +83,9 @@ function createWindow() {
         }
     })
 
-    mainWindow.on('show', function () {
-        appIcon.setHighlightMode('always')
-    })
+    // mainWindow.on('show', function () {
+    //     appIcon.setHighlightMode('always')
+    // })
 }
 
 // This method will be called when Electron has finished
