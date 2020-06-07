@@ -1,8 +1,9 @@
 'use strict';
+require('v8-compile-cache');
 require('electron-reload')(__dirname);
 
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Menu, Tray} = require('electron')
+const { app, BrowserWindow, Menu, Tray } = require('electron')
 
 const Store = require('electron-store');
 const store = new Store();
