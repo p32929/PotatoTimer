@@ -79,7 +79,10 @@ var ding = new Audio("audio/ding.mp3"),
 
             this.startTime = new Date().getTime();
             this.endTime = this.startTime + (workTime * 60 * 1000) + 1000; // I added an extra second so that the time the counter displays will start with the inputted breaktime/endtime (start with 18:00 instead of 17:59)
+
+            currentWindow.minimize()
             makeFullscreen(false)
+            currentWindow.hide()
         },
         stop: function () {
             // This stops the timer and resets it using
@@ -88,6 +91,7 @@ var ding = new Audio("audio/ding.mp3"),
             store.set('isStarted', false);
 
             this.reset(); // Do a soft reset.
+
             makeFullscreen(false)
         },
         pause: function () {
@@ -103,6 +107,7 @@ var ding = new Audio("audio/ding.mp3"),
             this.isPaused = false;
             this.startTime = new Date().getTime();
             this.endTime = this.startTime + this.timeRemaining;
+
             if (pomodoro.isBreak)
                 makeFullscreen(true)
             else
@@ -277,13 +282,13 @@ $(document).ready(function () {
 })
 
 function makeFullscreen(b) {
+    currentWindow.setAlwaysOnTop(b)
+    currentWindow.setFullScreen(b)
+
     if (b) {
+        currentWindow.show()
         currentWindow.maximize()
-        currentWindow.setAlwaysOnTop(b)
-        currentWindow.setFullScreen(b)
     } else {
-        currentWindow.setAlwaysOnTop(b)
-        currentWindow.setFullScreen(b)
         currentWindow.unmaximize()
     }
 }
