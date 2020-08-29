@@ -5,8 +5,8 @@ const store = new Store();
 const Dialogs = require('dialogs')
 const dialogs = Dialogs()
 
-var workTime = 0.1;
-var breakTime = 0.1;
+var workTime = 25;
+var breakTime = 5;
 
 var counterDOM = document.getElementById('counter')
 var sessionLengthDOM = document.getElementById('session-length')
