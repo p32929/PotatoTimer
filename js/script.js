@@ -5,8 +5,8 @@ const store = new Store();
 const Dialogs = require('dialogs')
 const dialogs = Dialogs()
 
-var workTime = 25;
-var breakTime = 5;
+var workTime = 0.1;
+var breakTime = 0.1;
 
 var counterDOM = document.getElementById('counter')
 var sessionLengthDOM = document.getElementById('session-length')
@@ -282,13 +282,14 @@ $(document).ready(function () {
 })
 
 function makeFullscreen(b) {
-    currentWindow.setAlwaysOnTop(b)
-    currentWindow.setFullScreen(b)
-
     if (b) {
         currentWindow.show()
         currentWindow.maximize()
+        currentWindow.setAlwaysOnTop(b)
+        currentWindow.setFullScreen(b)
     } else {
+        currentWindow.setAlwaysOnTop(b)
+        currentWindow.setFullScreen(b)
         currentWindow.unmaximize()
     }
 }
