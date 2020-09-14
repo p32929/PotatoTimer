@@ -1,6 +1,8 @@
 # Electron-Pomotodo
 A simple pomodoro app that forces you to take a break
 
+![Screenshot (76)](https://user-images.githubusercontent.com/6418354/93048184-1530fc00-f680-11ea-8094-e74799288ebb.png)
+
 [![](https://badgen.net/github/release/p32929/PotatoTimer)]() [![](https://badgen.net/github/release/p32929/PotatoTimer/stable)]() [![](https://badgen.net/github/tag/p32929/PotatoTimer)]() [![](https://badgen.net/github/watchers/p32929/PotatoTimer)]() [![](https://badgen.net/github/checks/p32929/PotatoTimer)]() [![](https://badgen.net/github/status/p32929/PotatoTimer)]() [![](https://badgen.net/github/stars/p32929/PotatoTimer)]() [![](https://badgen.net/github/forks/p32929/PotatoTimer)]() [![](https://badgen.net/github/issues/p32929/PotatoTimer)]() [![](https://badgen.net/github/open-issues/p32929/PotatoTimer)]() [![](https://badgen.net/github/closed-issues/p32929/PotatoTimer)]() [![](https://badgen.net/github/label-issues/p32929/PotatoTimer/help-wanted/open)]() [![](https://badgen.net/github/prs/p32929/PotatoTimer)]() [![](https://badgen.net/github/open-prs/p32929/PotatoTimer)]() [![](https://badgen.net/github/closed-prs/p32929/PotatoTimer)]() [![](https://badgen.net/github/merged-prs/p32929/PotatoTimer)]() [![](https://badgen.net/github/commits/p32929/PotatoTimer)]() [![](https://badgen.net/github/last-commit/p32929/PotatoTimer)]() [![](https://badgen.net/github/branches/p32929/PotatoTimer)]() [![](https://badgen.net/github/releases/p32929/PotatoTimer)]() [![](https://badgen.net/github/tags/p32929/PotatoTimer)]() [![](https://badgen.net/github/license/p32929/PotatoTimer)]() [![](https://badgen.net/github/contributors/p32929/PotatoTimer)]() [![](https://badgen.net/github/dependents-pkg/p32929/PotatoTimer)]() 
 
 ## Share
