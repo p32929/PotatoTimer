@@ -3,7 +3,7 @@ require('v8-compile-cache');
 require('electron-reload')(__dirname);
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu, Tray } = require('electron')
+const { app, BrowserWindow, Menu, Tray, shell } = require('electron')
 
 const Store = require('electron-store');
 const store = new Store();
@@ -55,6 +55,16 @@ function createWindow() {
         {
             label: 'Show', click: function () {
                 mainWindow.show()
+            }
+        },
+        {
+            label: 'Support this app ☕', click: function () {
+                shell.openExternal('https://www.buymeacoffee.com/p32929')
+            }
+        },
+        {
+            label: 'Need a custom build?', click: function () {
+                shell.openExternal('https://p32929.github.io/hire/')
             }
         },
         {
